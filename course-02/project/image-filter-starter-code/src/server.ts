@@ -19,7 +19,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
-  // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
+  // @TODO1 IMPLEMENT A RESTFUL ENDPOINT done
   // GET /filteredimage?image_url={{URL}} endpoint to filter an image from a public url.
       /*
       1. validate the image_url query
