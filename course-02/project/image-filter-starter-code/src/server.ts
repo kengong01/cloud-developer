@@ -50,13 +50,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       return res.status(400).send(`2: valid url is required`);
     }
 
-    var file = await filterImageFromURL(imgUrl);
+    var imgPath = await filterImageFromURL(imgUrl);
 
     //delete it
-    var fileArr = [file];
-    if (file) {
-      deleteLocalFiles(fileArr);
-      return res.status(200).send(`SUCCESS: saved image as: ${file}`);
+    if (imgPath) {
+      //return res.status(200).send(`SUCCESS: saved image as: ${imgPath}`);      
+      await res.sendFile(imgPath, (err: Error) => {
+        if (err) {
+          return res.status(400).send(`ERROR retrieving image: ${imgUrl}`);
+        }
+        deleteLocalFiles([imgPath]);
+      });
     }
     else
       return res.status(400).send(`ERROR saving image: ${imgUrl}`);
